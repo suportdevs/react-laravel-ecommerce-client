@@ -5,8 +5,7 @@ import styled from "styled-components";
 const Navbar = () => {
     const Container = styled.div`
         height: 60px;
-        background-color: teal;
-        color: #fff;
+        color: #333;
     `;
     const Wrapper = styled.div`
         padding: 10px 20px;
@@ -33,7 +32,6 @@ const Navbar = () => {
     const MenuItem = styled.div`
         margin-left: 10px;
         cursor: pointer;
-        color: #fff;
     `;
 
     return (
