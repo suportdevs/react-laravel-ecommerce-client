@@ -1,6 +1,6 @@
 import { ArrowBackIosNewOutlined, ArrowForwardIosOutlined } from "@mui/icons-material";
 import styled from "styled-components";
-import {sliderItems} from "../../data";
+import {sliderItems} from "../data";
 import { useState } from "react";
 
 const Container = styled.div`
@@ -85,7 +85,7 @@ const Slider = () => {
         <Container>
             <Arraw direction="left" onClick={() =>handleSliderDirection('left')}><ArrowBackIosNewOutlined /></Arraw>
             <SliderWrapper sliderIndex={sliderIndex}>
-                {sliderItems&& sliderItems.map((slider, index) =>(
+                {sliderItems && sliderItems.map((slider, index) =>(
                 <SliderItem key={index} bg={slider.bg}>
                     <ImgContainer>
                         <Image src={slider.img} />

@@ -9,6 +9,7 @@ const Image = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all .3s ease;
 `;
 const Info = styled.div`
     position: absolute;
