@@ -13,6 +13,7 @@ const Info = styled.div`
     justify-content: center;
     background-color: rgba(0,0,0, .2);
     transition: all .3s ease;
+    z-index: 3;
 `;
 const Container = styled.div`
     flex: 1;
