@@ -1,5 +1,6 @@
 import { SendOutlined } from "@mui/icons-material";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
     padding: 20px;
@@ -13,6 +14,7 @@ const Container = styled.div`
 const Title = styled.h1`
     font-size: 60px;
     font-weight: 900;
+    ${mobile({fontSize: "40px"})}
 `;
 const Description = styled.p`
     font-size: 20px;
@@ -22,6 +24,7 @@ const InputContainer = styled.div`
     width: 50%;
     border: 1px solid lightgray;
     display: flex;
+    ${mobile({width: '100%'})}
 `;
 const Input = styled.input`
     flex: 8;

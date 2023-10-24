@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import Navbar from "../../components/Navbar";
 import Announcement from "../../components/Announcement";
+import { mobile, tablet } from "../../responsive";
+import Footer from "../../components/Footer";
 
 const Container = styled.div`
     padding: 20px;
@@ -9,7 +11,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
     display: flex;
     justify-content: center;
-
+    ${tablet({flexDirection: 'column'})};
+    ${mobile({flexDirection: 'column'})};
 `;
 const Title = styled.h1`
     text-align: center;
@@ -18,6 +21,8 @@ const Title = styled.h1`
 
 const ProductContainer = styled.div`
     flex: 3;
+    ${tablet({flex: 1, width: '100%'})};
+    ${mobile({flex: 1, width: '100%'})};
 `;
 const ProductWrapper = styled.div`
     display: flex;
@@ -27,6 +32,8 @@ const ProductWrapper = styled.div`
 const ProductDetails = styled.div`
     flex: 3;
     display: flex;
+    ${tablet({flex: 6})};
+    ${mobile({flex: 6})};
 `;
 const ProductImg = styled.div`
     display: flex;
@@ -34,6 +41,7 @@ const ProductImg = styled.div`
 const Image = styled.img`
     width: 100px;
     margin-right: 20px;
+    ${mobile({width: '75px', marginRight: '5px'})}
 `;
 const ProductInfo = styled.div`
     display: flex;
@@ -61,13 +69,16 @@ const PriceButtons = styled.div`
     font-size: 20px;
     cursor: pointer;
     margin-bottom: 20px;
+    ${tablet({flexDirection: 'column', marginBottom: '0px'})};
+    ${mobile({flexDirection: 'column', marginBottom: '0px'})};
 `;
 const ProductQuantity = styled.span`
     margin: 0 10px;
 `;
 const Price = styled.span`
     font-size: 30px;
-    // margin: 5px;
+    ${tablet({fontSize: '25px'})};
+    ${mobile({fontSize: '25px'})};
 `;
 const ProductRemove = styled.div`
     flex: 1;
@@ -82,6 +93,8 @@ const SummaryWrapper = styled.div`
 
 const SummaryTitle = styled.h1`
   font-weight: 200;
+  ${tablet({fontSize: '30px'})};
+  ${mobile({fontSize: '30px'})};
 `;
 
 const SummaryItem = styled.div`
@@ -90,6 +103,8 @@ const SummaryItem = styled.div`
   justify-content: space-between;
   font-weight: ${(props) => props.type === "total" && "500"};
   font-size: ${(props) => props.type === "total" && "24px"};
+  ${tablet({margin: '10px 0'})};
+  ${mobile({margin: '10px 0'})};
 `;
 
 const SummaryItemText = styled.span``;
@@ -182,6 +197,7 @@ const Cart =() => {
                 </SummaryWrapper>
             </Wrapper>
         </Container>
+        <Footer />
         </>
     )
 }

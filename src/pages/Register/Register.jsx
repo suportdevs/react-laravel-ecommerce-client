@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../responsive";
 
 const Container = styled.div`
     width: 100vw;
@@ -8,12 +9,14 @@ const Container = styled.div`
     justify-content: center;
     background: linear-gradient(rgba(255,255,255, .5), rgba(255,255,255, .5)), url('https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') center;
     background-size: cover;
+    ${mobile({height: '100%'})}
 `;
 const Wrapper = styled.div`
     width: 40%;
     padding: 20px;
     background-color: white;
     border-radius: 5px;
+    ${mobile({width: '75%', margin: '20px 0'})}
 `;
 const Title = styled.h1`
     font-size: 25px;
@@ -21,6 +24,7 @@ const Title = styled.h1`
 const Form = styled.form`
     display: flex;
     flex-wrap: wrap;
+    ${mobile({flexDirection: 'column'})}
 `;
 const InputContainer = styled.div`
     flex: 1;
@@ -28,12 +32,14 @@ const InputContainer = styled.div`
     margin: 20px 10px 0 0;
     display: flex;
     flex-direction: column;
+    ${mobile({width: '100%', margin: '5px 0'})}
 `;
 const Label = styled.label``;
 const Input = styled.input`
     padding: 10px;
     border: 1px solid teal;
     margin-top: 5px;
+    ${mobile({padding: "5px"})}
 `;
 const Agreement = styled.span`
     font-size: 13px;

@@ -1,17 +1,20 @@
 import { Language, SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Navbar = () => {
     const Container = styled.div`
         height: 60px;
         color: #333;
+        ${mobile({height: "50px"})}
     `;
     const Wrapper = styled.div`
         padding: 10px 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        ${mobile({padding: "10px 5px"})}
     `;
     const Left = styled.div`
         flex: 1;
@@ -19,6 +22,7 @@ const Navbar = () => {
     const Logo = styled.h1`
         margin: 0;
         cursor: pointer;
+        ${mobile({fontSize: "18px"})}
     `;
     // const Center = styled.div`
     //     flex: 1;
@@ -32,6 +36,7 @@ const Navbar = () => {
     const MenuItem = styled.div`
         margin-left: 10px;
         cursor: pointer;
+        ${mobile({marginLeft: "5px", fontSize: "16px"})}
     `;
 
     return (

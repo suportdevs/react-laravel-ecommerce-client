@@ -4,26 +4,31 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Newsletter from "../../components/Newsletter";
 import Products from "../../components/Products";
+import { mobile } from "../../responsive";
 
 const Container = styled.div`
     padding: 20px;
 `;
 const Title = styled.h1`
     font-weight: 900;
+    ${mobile({textAlign: "center"})}
 `;
 const FilterContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    ${mobile({flexDirection: 'column', alignItems: "start"})}
 `;
 const Filter = styled.div`
     display: flex;
     align-items: center;
+    ${mobile({marginTop: "10px"})}
 `;
 const FilterText = styled.h3``;
 const Select = styled.select`
     margin-left: 10px;
     padding: 10px 20px;
+    ${mobile({padding: "5px"})}
 `;
 const Option = styled.option``;
 
