@@ -24,10 +24,12 @@ const Filter = styled.div`
     align-items: center;
     ${mobile({marginTop: "10px"})}
 `;
-const FilterText = styled.h3``;
+const FilterText = styled.h3`
+    font-size: 15px;
+`;
 const Select = styled.select`
     margin-left: 10px;
-    padding: 10px 20px;
+    padding: 7px 20px;
     ${mobile({padding: "5px"})}
 `;
 const Option = styled.option``;

@@ -10,6 +10,8 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    ${mobile({height: '30vh'})}
 `;
 const Title = styled.h1`
     font-size: 60px;

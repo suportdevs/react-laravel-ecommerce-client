@@ -9,11 +9,13 @@ const Container = styled.div`
 const Left = styled.div`
     flex: 1;
     padding: 20px;
+    color: #717171;
     ${mobile({padding: '10px 20px'})}
 `;
 const Logo = styled.h1`
     font-weight: 800;
-    ${mobile({fontSize: '30px'})}
+    font-size: 25px;
+    ${mobile({fontSize: '25px'})}
 `;
 const Description = styled.p`
     margin: 20px 0;
@@ -34,8 +36,9 @@ const Center = styled.div`
     ${mobile({padding: '10px 20px'})}
 `;
 const Title = styled.h1`
-    font-size: 30px;
+    font-size: 20px;
     margin-bottom: 20px;
+    color: #717171;
     ${mobile({fontSize: '20px', marginBottom: '10px'})}
 `;
 const List = styled.ul`
@@ -51,10 +54,12 @@ const ListItem = styled.li`
     width: 50%;
     margin-bottom: 10px;
     cursor: pointer;
+    color: #717171;
 `;
 const Right = styled.div`
     padding: 20px;
     flex: 1;
+    color: #717171;
     ${mobile({padding: '10px 20px'})}
 `;
 const ContactItem = styled.div`
@@ -70,7 +75,7 @@ const Footer = () => {
     return (
         <Container>
             <Left>
-                <Logo>E-commrece</Logo>
+                <Logo>Shop</Logo>
                 <Description>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, consectetur.</Description>
                 <SocialContainer>
                     <SocialIcon>

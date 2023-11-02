@@ -10,17 +10,18 @@ const Navbar = () => {
         ${mobile({height: "50px"})}
     `;
     const Wrapper = styled.div`
-        padding: 10px 20px;
+        padding: 15px 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        ${mobile({padding: "10px 5px"})}
+        ${mobile({padding: "10px 20px"})}
     `;
     const Left = styled.div`
         flex: 1;
     `;
     const Logo = styled.h1`
         margin: 0;
+        font-size: 25px;
         cursor: pointer;
         ${mobile({fontSize: "18px"})}
     `;
@@ -42,7 +43,7 @@ const Navbar = () => {
     return (
         <Container>
             <Wrapper>
-                <Left><Logo>E-commerce</Logo></Left>
+                <Left><Logo>Shop</Logo></Left>
                 {/* <Center>Center</Center> */}
                 <Right>
                     <MenuItem>
