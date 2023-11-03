@@ -91,13 +91,9 @@ const Register = () => {
                     </InputContainer>
                     <Agreement>
                         By creating an account, I consent to the processing of my personal
-                data in accordance with the <b>PRIVACY POLICY</b>
+                data in accordance with the <b>PRIVACY POLICY</b> <Link to="/login">Sign in</Link>
                     </Agreement>
                     <Button>Create</Button>
-                    <br />
-                    <div>
-                        Already have an account? <Link to="/login">Sign in</Link>
-                    </div>
                 </Form>
             </Wrapper>
         </Container>

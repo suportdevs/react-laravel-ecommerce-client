@@ -78,8 +78,8 @@ const Login = () => {
                         <Input type="password" placeholder="Confirm Password" />
                     </InputContainer> */}
                     <Button>Log In</Button>
-                    <Link>Forgot your password</Link>
-                    <Link to="/register">New member? Create an account</Link>
+                    <Link style={{marginTop: '15px'}}>Forgot your password</Link>
+                    <p style={{marginTop: '15px'}}>New member? <Link to="/register" > Create an account</Link></p>
                 </Form>
             </Wrapper>
         </Container>
