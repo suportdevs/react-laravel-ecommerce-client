@@ -2,6 +2,7 @@ import { Language, SearchOutlined, ShoppingCartOutlined } from "@mui/icons-mater
 import { Badge } from "@mui/material";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const Container = styled.div`
@@ -46,12 +47,16 @@ const Navbar = () => {
                 <Left><Logo>Shop</Logo></Left>
                 {/* <Center>Center</Center> */}
                 <Right>
+                    <Link to="/register">
                     <MenuItem>
                         Register
                     </MenuItem>
+                    </Link>
+                    <Link to="login">
                     <MenuItem>
                         Login
                     </MenuItem>
+                    </Link>
                     <MenuItem>
                         <SearchOutlined />
                     </MenuItem>
