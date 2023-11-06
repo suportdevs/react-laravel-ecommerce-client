@@ -8,6 +8,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import { Provider } from 'react-redux';
 import { store } from './services/store';
+import { Toaster } from 'react-hot-toast';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
 root.render(
   <Provider store={store}>
     <RouterProvider router={router} />
+    <Toaster />
   </Provider>
 );
 

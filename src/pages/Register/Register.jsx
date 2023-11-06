@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { mobile } from "../../responsive";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useRegisterMutation } from "../../services/authApi";
 import axios from "../../utilies/axios";
+import toast from "react-hot-toast";
+import GuestLayout from "../../components/Layout/GuestLayout";
 
 const Container = styled.div`
     width: 100vw;
@@ -63,7 +65,7 @@ const Button = styled.button`
 `;
 
 const Register = () => {
-    const [register, response] = useRegisterMutation();
+    const [register, {isLoading, isError, isSuccess, error}] = useRegisterMutation();
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
     const [username, setUserName] = useState("");
@@ -76,9 +78,12 @@ const Register = () => {
         await axios.get('/sanctum/csft-token');
         await register({firstname, lastname, username, email, password, confirm_password});
     }
-    console.log(response);
+    isError && toast.error(error);
+    isSuccess && (<Navigate to="/login" />);
 
     return (
+        <>
+        <GuestLayout />
         <Container>
             <Wrapper>
                 <Title>Create an Account</Title>
@@ -111,10 +116,11 @@ const Register = () => {
                         By creating an account, I consent to the processing of my personal
                 data in accordance with the <b>PRIVACY POLICY</b> <Link to="/login">Sign in</Link>
                     </Agreement>
-                    <Button type="submit">Create</Button>
+                    <Button type="submit">{isLoading ? 'Loading...' : 'Create'}</Button>
                 </Form>
             </Wrapper>
         </Container>
+        </>
     )
 }
 

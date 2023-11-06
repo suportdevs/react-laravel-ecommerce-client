@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { mobile } from "../../responsive";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "../../utilies/axios";
+import { useLoginMutation } from "../../services/authApi";
+import toast from "react-hot-toast";
+import GuestLayout from "../../components/Layout/GuestLayout";
 
 const Container = styled.div`
     width: 100vw;
@@ -56,15 +61,27 @@ const Button = styled.button`
 // `;
 
 const Login = () => {
-    
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [login, {isLoading, isError, error, isSuccess}] = useLoginMutation();
+
+    const handleLoginSubmit = async (event) => {
+        event.preventDefault();
+        await axios.get('/sanctum/csrf-token');
+        await login({email, password});
+    }
+    isError && toast.error(error);
+        
     return (
+        <>
+        <GuestLayout />
         <Container>
             <Wrapper>
                 <Title>Sign In</Title>
-                <Form>
+                <Form onSubmit={handleLoginSubmit}>
                     <InputContainer>
-                        <Label>Username</Label>
-                        <Input type="text" placeholder="Username" />
+                        <Label>Email</Label>
+                        <Input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                     </InputContainer>
                     {/* <InputContainer>
                         <Label>Email</Label>
@@ -72,18 +89,19 @@ const Login = () => {
                     </InputContainer> */}
                     <InputContainer>
                         <Label>Password</Label>
-                        <Input type="password" placeholder="Password" />
+                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                     </InputContainer>
                     {/* <InputContainer>
                         <Label>Confirm Password</Label>
                         <Input type="password" placeholder="Confirm Password" />
                     </InputContainer> */}
-                    <Button>Log In</Button>
+                    <Button type="submit">{isLoading ? 'Loading...': 'Log In'}</Button>
                     <Link style={{marginTop: '15px'}}>Forgot your password</Link>
                     <p style={{marginTop: '15px'}}>New member? <Link to="/register" > Create an account</Link></p>
                 </Form>
             </Wrapper>
         </Container>
+        </>
     )
 }
 
