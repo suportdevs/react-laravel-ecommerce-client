@@ -1,23 +1,23 @@
-import {createApi} from '@reduxjs/toolkit/query/react';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_BACKEND_BASE_URL}),
     endpoints: (builder) => ({
-        csrf: builder.mutation({
+        csrf: builder.query({
             query: () => ({
                 url: '/sanctum/csft-token',
             }),
         }),
         register: builder.mutation({
-            query: (data) => ({
+            query: ({data}) => ({
                 url: '/register',
                 method: 'POST',
                 body: data,
             }),
         }),
         login: builder.mutation({
-            query: (data) => ({
+            query: ({data}) => ({
                 url: '/login',
                 method: 'POST',
                 body: data
