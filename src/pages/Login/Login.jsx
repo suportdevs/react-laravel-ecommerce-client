@@ -80,18 +80,10 @@ const Login = () => {
                         <Label>Email</Label>
                         <Input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                     </InputContainer>
-                    {/* <InputContainer>
-                        <Label>Email</Label>
-                        <Input type="text" placeholder="Email" />
-                    </InputContainer> */}
                     <InputContainer>
                         <Label>Password</Label>
                         <Input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                     </InputContainer>
-                    {/* <InputContainer>
-                        <Label>Confirm Password</Label>
-                        <Input type="password" placeholder="Confirm Password" />
-                    </InputContainer> */}
                     <Button type="submit">{isLoading ? 'Loading...': 'Log In'}</Button>
                     <Link style={{marginTop: '15px'}}>Forgot your password</Link>
                     <p style={{marginTop: '15px'}}>New member? <Link to="/register" > Create an account</Link></p>
