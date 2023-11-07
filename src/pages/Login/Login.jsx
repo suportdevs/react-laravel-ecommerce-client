@@ -56,9 +56,6 @@ const Button = styled.button`
     cursor: pointer;
     margin-top: 20px;
 `;
-// const Link = styled.a`
-//     margin-top: 10px;
-// `;
 
 const Login = () => {
     const [email, setEmail] = useState("");
