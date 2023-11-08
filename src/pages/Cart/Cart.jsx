@@ -178,20 +178,20 @@ const Cart =() => {
                 <SummaryWrapper>
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                     <SummaryItem>
-                    <SummaryItemText>Subtotal</SummaryItemText>
-                    <SummaryItemPrice>$ 80</SummaryItemPrice>
+                        <SummaryItemText>Subtotal</SummaryItemText>
+                        <SummaryItemPrice>$ 80</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
-                    <SummaryItemText>Estimated Shipping</SummaryItemText>
-                    <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                        <SummaryItemText>Estimated Shipping</SummaryItemText>
+                        <SummaryItemPrice>$ 5.90</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
-                    <SummaryItemText>Shipping Discount</SummaryItemText>
-                    <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                        <SummaryItemText>Shipping Discount</SummaryItemText>
+                        <SummaryItemPrice>$ -5.90</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem type="total">
-                    <SummaryItemText>Total</SummaryItemText>
-                    <SummaryItemPrice>$ 80</SummaryItemPrice>
+                        <SummaryItemText>Total</SummaryItemText>
+                        <SummaryItemPrice>$ 80</SummaryItemPrice>
                     </SummaryItem>
                     <Button>CHECKOUT NOW</Button>
                 </SummaryWrapper>
