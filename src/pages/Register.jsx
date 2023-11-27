@@ -85,27 +85,27 @@ const Register = () => {
                 <Form onSubmit={handleRegisterSubmit}>
                     <InputContainer>
                         <Label>First Name</Label>
-                        <Input type="text" onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
+                        <Input type="text" onChange={(e) => setFirstName(e.target.value)} placeHolder="First Name" />
                     </InputContainer>
                     <InputContainer>
                         <Label>Last Name</Label>
-                        <Input type="text" onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" />
+                        <Input type="text" onChange={(e) => setLastName(e.target.value)} placeHolder="Last Name" />
                     </InputContainer>
                     <InputContainer>
                         <Label>Username</Label>
-                        <Input type="text" onChange={(e) => setUserName(e.target.value)} placeholder="Username" />
+                        <Input type="text" onChange={(e) => setUserName(e.target.value)} placeHolder="Username" />
                     </InputContainer>
                     <InputContainer>
                         <Label>Email</Label>
-                        <Input type="text" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                        <Input type="text" onChange={(e) => setEmail(e.target.value)} placeHolder="Email" />
                     </InputContainer>
                     <InputContainer>
                         <Label>Password</Label>
-                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeHolder="Password" />
                     </InputContainer>
                     <InputContainer>
                         <Label>Confirm Password</Label>
-                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
+                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} placeHolder="Confirm Password" />
                     </InputContainer>
                     <Agreement>
                         By creating an account, I consent to the processing of my personal

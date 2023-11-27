@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {mobile} from "../responsive"
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "../utilies/axios";
 
 const Container = styled.div`
     width: 100vw;
@@ -57,8 +58,16 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const csrf = () => axios.get('/sanctum/csrf-cookie');
+
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
+        await csrf();
+        try{
+            await axios.post('/login', {email,password});
+        }catch(err){
+            console.log(err);
+        }
     }
         
     return (
@@ -69,11 +78,11 @@ const Login = () => {
                 <Form onSubmit={handleLoginSubmit}>
                     <InputContainer>
                         <Label>Email</Label>
-                        <Input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                        <Input type="email" onChange={(e) => setEmail(e.target.value)} placeHolder="Email" />
                     </InputContainer>
                     <InputContainer>
                         <Label>Password</Label>
-                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeHolder="Password" />
                     </InputContainer>
                     <Button type="submit">Log In</Button>
                     <Link to="/forgot-password" style={{marginTop: '15px'}}>Forgot your password</Link>
