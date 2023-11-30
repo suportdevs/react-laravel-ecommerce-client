@@ -2,6 +2,8 @@ import styled from "styled-components";
 import {mobile} from "../responsive"
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
+import { useRegisterMutation } from "../services/authApi";
+import toast from "react-hot-toast";
 
 const Container = styled.div`
     width: 100vw;
@@ -67,14 +69,18 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
+    const [register, {isLoading, isError, error, isSuccess}] = useRegisterMutation();
     
     const handleRegisterSubmit = async (event) => {
         event.preventDefault();
         try{
             const data = {firstname, lastname, username, email, password, confirm_password};
+            await register(data).unwrap();
         }catch(err){
             console.log(err);
         }
+        console.log(error);
+        isError && toast.error(error.data.message);
     }
 
     return (
@@ -111,8 +117,7 @@ const Register = () => {
                         By creating an account, I consent to the processing of my personal
                 data in accordance with the <b>PRIVACY POLICY</b> <Link to="/login">Sign in</Link>
                     </Agreement>
-                    <Button type="submit">Create</Button>
-                    {/* <Button type="submit">{isLoading ? 'Loading...' : 'Create'}</Button> */}
+                    <Button type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Create'}</Button>
                 </Form>
             </Wrapper>
         </Container>

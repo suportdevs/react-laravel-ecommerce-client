@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import { store } from './services/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -38,10 +39,10 @@ const router = createBrowserRouter([
 
 root.render(
   <>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <RouterProvider router={router} />
       <Toaster />
-    {/* </Provider> */}
+    </Provider>
   </>
 );
 

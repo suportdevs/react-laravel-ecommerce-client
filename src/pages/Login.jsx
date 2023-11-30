@@ -2,7 +2,8 @@ import styled from "styled-components";
 import {mobile} from "../responsive"
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import axios from "../utilies/axios";
+import { useLoginMutation } from "../services/authApi";
+import toast from "react-hot-toast";
 
 const Container = styled.div`
     width: 100vw;
@@ -57,18 +58,18 @@ const Button = styled.button`
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const csrf = () => axios.get('/sanctum/csrf-cookie');
+    const [login, {isLoading, isError, error, isSuccess}] = useLoginMutation();
 
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
-        await csrf();
         try{
-            await axios.post('/login', {email,password});
+            await login({email, password}).unwrap();
         }catch(err){
             console.log(err);
         }
     }
+    isError && toast.error(error?.data?.message);
+    isSuccess && toast.success("Login successfull.");
         
     return (
         <>
@@ -78,13 +79,13 @@ const Login = () => {
                 <Form onSubmit={handleLoginSubmit}>
                     <InputContainer>
                         <Label>Email</Label>
-                        <Input type="email" onChange={(e) => setEmail(e.target.value)} placeHolder="Email" />
+                        <Input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" required/>
                     </InputContainer>
                     <InputContainer>
                         <Label>Password</Label>
-                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeHolder="Password" />
+                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" required/>
                     </InputContainer>
-                    <Button type="submit">Log In</Button>
+                    <Button type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Log In'}</Button>
                     <Link to="/forgot-password" style={{marginTop: '15px'}}>Forgot your password</Link>
                     <p style={{marginTop: '15px'}}>New member? <Link to="/register" > Create an account</Link></p>
                 </Form>
