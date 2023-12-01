@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import { store } from './services/store';
+import EmailVerification from './pages/EmailVerification';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: '/password-reset/:token',
     element: <ResetPassword />,
+  },
+  {
+    path: '/emai/verify/:id/:hash',
+    element: <EmailVerification />,
   }
 ]);
 

@@ -18,7 +18,13 @@ export const authApi = createApi({
                 body: data,
             }),
         }),
+        sendEmailVerifyMail: builder.query({
+            query: (id) => `/send/email/verify-mail/${id}`
+        }),
+        emailVerify: builder.query({
+            query: ({id, hash}) => `/email/verify/${id}/${hash}`
+        }),
     }),
 });
 
-export const {useRegisterMutation, useLoginMutation} = authApi;
+export const {useRegisterMutation, useLoginMutation, useEmailVerifyQuery, useSendEmailVerifyMailQuery} = authApi;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {mobile} from "../responsive"
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRegisterMutation } from "../services/authApi";
 import toast from "react-hot-toast";
@@ -72,14 +72,15 @@ const Register = () => {
     const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirm_password, setConfirmPassword] = useState("");
+    const [password_confirmation, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
-    const [register, {isLoading, isError, error, isSuccess}] = useRegisterMutation();
+    const navigate = useNavigate();
+    const [register, {data, isLoading, isSuccess}] = useRegisterMutation();
     
     const handleRegisterSubmit = async (event) => {
         event.preventDefault();
         try{
-            const data = {firstname, lastname, username, email, password, confirm_password};
+            const data = {firstname, lastname, username, email, password, password_confirmation};
             await register(data).unwrap();
         }catch(err){
             if(err.status === 422){
@@ -87,7 +88,9 @@ const Register = () => {
             }
         }
     }
-
+    data && toast.success(data.message);
+    if(data && isSuccess) navigate('/login');
+    
     return (
         <>
         <Container>
