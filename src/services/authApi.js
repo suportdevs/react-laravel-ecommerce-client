@@ -19,7 +19,7 @@ export const authApi = createApi({
             }),
         }),
         sendEmailVerifyMail: builder.query({
-            query: (id) => `/send/email/verify-mail/${id}`
+            query: (id) => `/send/email/verify-link/${id}`
         }),
         emailVerify: builder.query({
             query: ({id, hash}) => `/email/verify/${id}/${hash}`
