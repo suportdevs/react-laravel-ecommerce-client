@@ -61,6 +61,10 @@ const Button = styled.button`
     text-align: center;
     cursor: pointer;
 `;
+const ErrorText = styled.span`
+    color: red;
+    font-size: 12px;
+`
 
 const Register = () => {
     const [firstname, setFirstName] = useState("");
@@ -69,6 +73,7 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
+    const [errors, setErrors] = useState([]);
     const [register, {isLoading, isError, error, isSuccess}] = useRegisterMutation();
     
     const handleRegisterSubmit = async (event) => {
@@ -77,10 +82,10 @@ const Register = () => {
             const data = {firstname, lastname, username, email, password, confirm_password};
             await register(data).unwrap();
         }catch(err){
-            console.log(err);
+            if(err.status === 422){
+                setErrors(err.data.error);
+            }
         }
-        console.log(error);
-        isError && toast.error(error.data.message);
     }
 
     return (
@@ -91,27 +96,45 @@ const Register = () => {
                 <Form onSubmit={handleRegisterSubmit}>
                     <InputContainer>
                         <Label>First Name</Label>
-                        <Input type="text" onChange={(e) => setFirstName(e.target.value)} placeHolder="First Name" />
+                        <Input type="text" onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
+                        {errors.firstname && 
+                        <ErrorText className="text-sm text-red-500">{errors.firstname[0]}</ErrorText>
+                        }
                     </InputContainer>
                     <InputContainer>
                         <Label>Last Name</Label>
-                        <Input type="text" onChange={(e) => setLastName(e.target.value)} placeHolder="Last Name" />
+                        <Input type="text" onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" />
+                        {errors.lastname && 
+                        <ErrorText className="text-sm text-red-500">{errors.lastname[0]}</ErrorText>
+                        }
                     </InputContainer>
                     <InputContainer>
                         <Label>Username</Label>
-                        <Input type="text" onChange={(e) => setUserName(e.target.value)} placeHolder="Username" />
+                        <Input type="text" onChange={(e) => setUserName(e.target.value)} placeholder="Username" />
+                        {errors.username && 
+                        <ErrorText className="text-sm text-red-500">{errors.username[0]}</ErrorText>
+                        }
                     </InputContainer>
                     <InputContainer>
                         <Label>Email</Label>
-                        <Input type="text" onChange={(e) => setEmail(e.target.value)} placeHolder="Email" />
+                        <Input type="text" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                        {errors.email && 
+                        <ErrorText className="text-sm text-red-500">{errors.email[0]}</ErrorText>
+                        }
                     </InputContainer>
                     <InputContainer>
                         <Label>Password</Label>
-                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeHolder="Password" />
+                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                        {errors.password && 
+                        <ErrorText className="text-sm text-red-500">{errors.password[0]}</ErrorText>
+                        }
                     </InputContainer>
                     <InputContainer>
                         <Label>Confirm Password</Label>
-                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} placeHolder="Confirm Password" />
+                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
+                        {errors.password_confirmation && 
+                        <ErrorText className="text-sm text-red-500">{errors.password_confirmation[0]}</ErrorText>
+                        }
                     </InputContainer>
                     <Agreement>
                         By creating an account, I consent to the processing of my personal
