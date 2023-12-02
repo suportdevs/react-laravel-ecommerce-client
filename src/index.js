@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
   {
-    path: '/emai/verify/:id/:hash',
+    path: '/email/verify/:id/:hash',
     element: <EmailVerification />,
   }
 ]);

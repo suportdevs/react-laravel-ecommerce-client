@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLoginMutation } from "../services/authApi";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { currentUser } from "../services/userSlice";
 
 const Container = styled.div`
     width: 100vw;
@@ -56,9 +58,10 @@ const Button = styled.button`
 `;
 
 const Login = () => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [login, {isLoading, isError, error, isSuccess}] = useLoginMutation();
+    const [login, {data, isLoading, isError, error, isSuccess}] = useLoginMutation();
 
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
@@ -70,6 +73,14 @@ const Login = () => {
     }
     isError && toast.error(error?.data?.message);
     isSuccess && toast.success("Login successfull.");
+    console.log(data);
+    if(!data?.email_verified){
+
+    }
+    if(data && isSuccess){
+        localStorage.setItem('accessToken', data.token);
+        dispatch(currentUser(data.user));
+    }
         
     return (
         <>

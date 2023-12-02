@@ -1,13 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEmailVerifyQuery } from "../services/authApi";
 import toast from "react-hot-toast";
 
 const EmailVerification = () => {
+    const navigate = useNavigate();
     const {id, hash} = useParams();
     const {data, isLoading} = useEmailVerifyQuery({id, hash});
     
     if(data){
         toast.success(data.message);
+        navigate('/login');
+        toast.success("Please login now");
     }
 
     if(isLoading){
