@@ -3,6 +3,8 @@ import {mobile} from "../responsive"
 import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import GuestLayout from "../components/Layout/GuestLayout";
+import { useNewPasswordMutation } from "../services/authApi";
+import toast from "react-hot-toast";
 
 const Container = styled.div`
     width: 100vw;
@@ -57,18 +59,26 @@ const Button = styled.button`
 const ResetPassword = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirm_password, setConfirmPassword] = useState("");
+    const [password_confirmation, setConfirmPassword] = useState("");
     const [searchParams] = useSearchParams();
+    // const [token, setToken] = useState("");
     const {token} = useParams();
+    const [newPassword, {data, isLoading, isError, isSuccess}] = useNewPasswordMutation();
 
     useEffect(() => {
         setEmail(searchParams.get('email'));
-    }, []);
-    console.log(token, email, password, confirm_password);
-
+        // setToken(searchParams.get('token'));
+    }, [searchParams]);
+console.log(token)
     const handleAddNewPasswordSubmit = async (event) => {
         event.preventDefault();
+        try{
+            await newPassword({email, password, password_confirmation, token});
+        }catch(err){
+            console.log(err);
+        }
     }
+    (isSuccess && data) && toast.success(data.status);
         
     return (
         <>
@@ -83,13 +93,13 @@ const ResetPassword = () => {
                     </InputContainer>
                     <InputContainer>
                         <Label>Password</Label>
-                        <Input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                        <Input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" />
                     </InputContainer>
                     <InputContainer>
                         <Label>Confirm Password</Label>
-                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
+                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} value={password_confirmation} placeholder="Confirm Password" />
                     </InputContainer>
-                    <Button type="submit">Change Password</Button>
+                    <Button type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Change Password'}</Button>
                 </Form>
             </Wrapper>
         </Container>

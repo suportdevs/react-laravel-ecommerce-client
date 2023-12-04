@@ -24,7 +24,23 @@ export const authApi = createApi({
         emailVerify: builder.query({
             query: ({id, hash}) => `/email/verify/${id}/${hash}`
         }),
+        passwordResetLink: builder.mutation({
+            query: (data) => (
+                console.log(data),
+                {
+                url: '/forgot-password',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        newPassword: builder.mutation({
+            query: (data) => ({
+                url: '/reset-password',
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 });
 
-export const {useRegisterMutation, useLoginMutation, useEmailVerifyQuery, useSendEmailVerifyMailQuery} = authApi;
+export const {useRegisterMutation, useLoginMutation, useEmailVerifyQuery, useSendEmailVerifyMailQuery, usePasswordResetLinkMutation, useNewPasswordMutation} = authApi;

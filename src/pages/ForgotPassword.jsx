@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import {mobile} from "../responsive"
+import { usePasswordResetLinkMutation } from "../services/authApi";
+import toast from "react-hot-toast";
 
 const Container = styled.div`
     width: 100vw;
@@ -52,9 +54,16 @@ const Button = styled.button`
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
+    const [passwordResetLink, {data, isLoading, isError, isSuccess}] = usePasswordResetLinkMutation();
     const handleResetPasswordSendLinkSubmit = async (event) => {
         event.preventDefault();
+        try{
+            await passwordResetLink({email}).unwrap();
+        }catch(err){
+            console.log(err);
+        }
     }
+    (data && isSuccess) && toast.success(data.status);
         
     return (
         <>
@@ -64,9 +73,9 @@ const ForgotPassword = () => {
                 <Form onSubmit={handleResetPasswordSendLinkSubmit}>
                     <InputContainer>
                         <Label>Email</Label>
-                        <Input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                        <Input type="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" />
                     </InputContainer>
-                    <Button type="submit">Reset your password</Button>
+                    <Button type="submit">{isLoading ? 'Loading...' : 'Reset your password'}</Button>
                 </Form>
             </Wrapper>
         </Container>
