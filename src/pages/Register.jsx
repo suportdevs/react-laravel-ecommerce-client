@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRegisterMutation } from "../services/authApi";
 import toast from "react-hot-toast";
+import GuestLayout from "../components/Layout/GuestLayout";
 
 const Container = styled.div`
     width: 100vw;
@@ -93,6 +94,7 @@ const Register = () => {
     
     return (
         <>
+        <GuestLayout />
         <Container>
             <Wrapper>
                 <Title>Create an Account</Title>

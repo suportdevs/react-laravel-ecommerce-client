@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import {mobile} from "../responsive"
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useLoginMutation } from "../services/authApi";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { currentUser } from "../services/userSlice";
 import VerifyEmail from "./VerifyEmail";
+import GuestLayout from "../components/Layout/GuestLayout";
 
 const Container = styled.div`
     width: 100vw;
@@ -74,17 +75,19 @@ const Login = () => {
     }
     isError && toast.error(error?.data?.message);
     isSuccess && toast.success("Login successfull.");
-    console.log(data);
+
     if(data && !data.email_verified){
         return <VerifyEmail id={data?.user.id} />
     }
     if(data && isSuccess){
         localStorage.setItem('accessToken', data.token);
         dispatch(currentUser(data.user));
+        return <Navigate to="/" />
     }
         
     return (
         <>
+        <GuestLayout />
         <Container>
             <Wrapper>
                 <Title>Sign In</Title>

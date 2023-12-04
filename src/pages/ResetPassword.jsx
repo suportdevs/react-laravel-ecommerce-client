@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {mobile} from "../responsive"
 import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import GuestLayout from "../components/Layout/GuestLayout";
 
 const Container = styled.div`
     width: 100vw;
@@ -71,6 +72,7 @@ const ResetPassword = () => {
         
     return (
         <>
+        <GuestLayout />
         <Container>
             <Wrapper>
                 <Title>Add your new password</Title>
