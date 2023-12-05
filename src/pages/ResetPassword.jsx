@@ -61,15 +61,14 @@ const ResetPassword = () => {
     const [password, setPassword] = useState("");
     const [password_confirmation, setConfirmPassword] = useState("");
     const [searchParams] = useSearchParams();
-    // const [token, setToken] = useState("");
-    const {token} = useParams();
+    const [token, setToken] = useState("");
     const [newPassword, {data, isLoading, isError, isSuccess}] = useNewPasswordMutation();
 
     useEffect(() => {
         setEmail(searchParams.get('email'));
-        // setToken(searchParams.get('token'));
+        setToken(searchParams.get('token'));
     }, [searchParams]);
-console.log(token)
+    
     const handleAddNewPasswordSubmit = async (event) => {
         event.preventDefault();
         try{
@@ -93,11 +92,11 @@ console.log(token)
                     </InputContainer>
                     <InputContainer>
                         <Label>Password</Label>
-                        <Input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" />
+                        <Input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" required/>
                     </InputContainer>
                     <InputContainer>
                         <Label>Confirm Password</Label>
-                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} value={password_confirmation} placeholder="Confirm Password" />
+                        <Input type="password" onChange={(e) => setConfirmPassword(e.target.value)} value={password_confirmation} placeholder="Confirm Password" required/>
                     </InputContainer>
                     <Button type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Change Password'}</Button>
                 </Form>

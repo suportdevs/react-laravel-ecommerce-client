@@ -73,7 +73,7 @@ const ForgotPassword = () => {
                 <Form onSubmit={handleResetPasswordSendLinkSubmit}>
                     <InputContainer>
                         <Label>Email</Label>
-                        <Input type="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" />
+                        <Input type="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" required/>
                     </InputContainer>
                     <Button type="submit">{isLoading ? 'Loading...' : 'Reset your password'}</Button>
                 </Form>
