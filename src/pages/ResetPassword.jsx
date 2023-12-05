@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {mobile} from "../responsive"
-import { useParams, useSearchParams } from "react-router-dom";
+import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import GuestLayout from "../components/Layout/GuestLayout";
 import { useNewPasswordMutation } from "../services/authApi";
@@ -78,6 +78,7 @@ const ResetPassword = () => {
         }
     }
     (isSuccess && data) && toast.success(data.status);
+    if(isSuccess && data)return <Navigate to="/login" />;
         
     return (
         <>

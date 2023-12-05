@@ -70,6 +70,7 @@ const ForgotPassword = () => {
         <Container>
             <Wrapper>
                 <Title>Forgot your password? Let us know your email address, we will email you a password reset link.</Title>
+                {data?.status && <p style={{color: 'green'}}>{data.status}</p>}
                 <Form onSubmit={handleResetPasswordSendLinkSubmit}>
                     <InputContainer>
                         <Label>Email</Label>
