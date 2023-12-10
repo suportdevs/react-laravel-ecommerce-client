@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
+import ProductList from "./pages/ProductList";
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { Provider } from 'react-redux';
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+  },
+  {
+    path: '/products/:category',
+    element: <ProductList />,
   },
   {
     path: '/login',

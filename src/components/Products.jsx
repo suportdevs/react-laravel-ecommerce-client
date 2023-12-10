@@ -21,7 +21,7 @@ const Description = styled.p`
 `;
 
 
-const Products = () => {
+const Products = ({category, filters, sort}) => {
     return (
         <Container>
         <Title>Hot Deal</Title>

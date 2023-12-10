@@ -44,7 +44,11 @@ const Navbar = () => {
     return (
         <Container>
             <Wrapper>
-                <Left><Logo>Shop</Logo></Left>
+                <Left>
+                    <Link to="/">
+                    <Logo>Shop</Logo>
+                    </Link>
+                </Left>
                 {/* <Center>Center</Center> */}
                 <Right>
                     <Link to="/register">
