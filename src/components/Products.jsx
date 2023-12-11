@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import {popularProducts} from "../data";
 import ProductItem from "./ProductItem";
+import { useGetProductsMutation } from "../services/webApi";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
     padding: 20px;
@@ -22,6 +24,15 @@ const Description = styled.p`
 
 
 const Products = ({category, filters, sort}) => {
+    const [getProducts, {data, isLoading, isSuccess}] = useGetProductsMutation();
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        category && getProducts(category);
+        setProducts(data && isSuccess ? data : []);
+    }, [category]);
+
+    console.log(products);
     return (
         <Container>
         <Title>Hot Deal</Title>

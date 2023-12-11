@@ -25,9 +25,7 @@ export const authApi = createApi({
             query: ({id, hash}) => `/email/verify/${id}/${hash}`
         }),
         passwordResetLink: builder.mutation({
-            query: (data) => (
-                console.log(data),
-                {
+            query: (data) => ({
                 url: '/forgot-password',
                 method: 'POST',
                 body: data,

@@ -56,7 +56,7 @@ const Navbar = () => {
                         Register
                     </MenuItem>
                     </Link>
-                    <Link to="login">
+                    <Link to="/login">
                     <MenuItem>
                         Login
                     </MenuItem>
