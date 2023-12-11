@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import {categories} from "../data";
 import CategoryItem from "./CategoryItem";
 import { mobile } from "../responsive";
+import { useGetCategoriesQuery } from "../services/webApi";
 
 const Container = styled.div`
     padding: 20px;
@@ -21,13 +21,15 @@ const Description = styled.p`
 `;
 
 const Categories = () => {
+    const {data: categories, isLoading, isSuccess} = useGetCategoriesQuery();
+    console.log(categories);
     return (
         <Container>
             <Title>All Categories</Title>
             <Description>Find your best feelings in our deal</Description>
             <CategoryContainer>
             {
-                categories && categories.map((item, index) => <CategoryItem item={item} key={index}></CategoryItem>)
+                isLoading ? 'Loading...' : (isSuccess && categories) && categories.map((item, index) => <CategoryItem item={item} key={index}></CategoryItem>)
             }
             </CategoryContainer>
         </Container>

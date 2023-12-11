@@ -7,6 +7,7 @@ import Products from "../components/Products";
 import {mobile} from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useGetColorsQuery, useGetSizesQuery } from "../services/webApi";
 
 const Container = styled.div`
     padding: 20px;
@@ -37,6 +38,8 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+    const {data: colors, isLoading:isColorLoading, isSuccess:isColorSuccess} = useGetColorsQuery();
+    const {data: sizes, isLoading: isSizeLoading, isSuccess: isSizeSuccess} = useGetSizesQuery();
     const location = useLocation();
     const category = location.pathname.split("/")[2];
     const [filters, setFilters] = useState({});
@@ -54,22 +57,17 @@ const ProductList = () => {
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products</FilterText>
-                    <Select name="color" onChange={handleFilters}>
-                        <Option selected disabled>Color</Option>
-                        <Option >White</Option>
-                        <Option >Black</Option>
-                        <Option >Blue</Option>
-                        <Option >Green</Option>
-                        <Option >Yellow</Option>
-                        <Option >Red</Option>
+                    <Select name="colors" onChange={handleFilters}>
+                        <Option selected disabled value="">{isColorLoading ? 'Loading' : 'Color'}</Option>
+                        {
+                            (isColorSuccess && colors) && colors.map((color, index) => <Option value={color.id} key={color.id}>{color.name}</Option>)
+                        }
                     </Select>
-                    <Select name="size" onChange={handleFilters}>
-                        <Option selected disabled>Size</Option>
-                        <Option >XS</Option>
-                        <Option >S</Option>
-                        <Option >M</Option>
-                        <Option >L</Option>
-                        <Option >XL</Option>
+                    <Select name="sizes" onChange={handleFilters}>
+                        <Option selected disabled value="">{isSizeLoading ? 'Loading...' : 'Size'}</Option>
+                        {
+                            (isSizeSuccess && sizes) && sizes.map((size, index) => <Option value={size.id} key={size.id}>{size.name}</Option>)
+                        }
                     </Select>
                 </Filter>
                 <Filter>

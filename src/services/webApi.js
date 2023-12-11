@@ -6,12 +6,27 @@ export const webApi = createApi({
     endpoints: (builder) => ({
         getProducts: builder.mutation({
             query: (category) => ({
-                url: `/categories`,
+                url: `/products`,
                 method: 'POST',
                 body: category,
             }),
         }),
+        getCategories: builder.query({
+            query: () => `/categories`,
+        }),
+        getColors: builder.query({
+            query: () => `/colors`,
+        }),
+        getSizes: builder.query({
+            query: () => `/sizes`,
+        }),
+        // getCategories: builder.mutation({
+        //     query: () => ({
+        //         url: `/categories`,
+        //         method: 'POST',
+        //     }),
+        // }),
     }),
 });
 
-export const {useGetProductsMutation} = webApi;
+export const {useGetProductsMutation, useGetCategoriesQuery, useGetColorsQuery, useGetSizesQuery} = webApi;

@@ -4,42 +4,43 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 
+const Container = styled.div`
+height: 60px;
+color: #333;
+${mobile({height: "50px"})}
+`;
+const Wrapper = styled.div`
+padding: 15px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+${mobile({padding: "10px 20px"})}
+`;
+const Left = styled.div`
+flex: 1;
+`;
+const Logo = styled.h1`
+margin: 0;
+font-size: 25px;
+cursor: pointer;
+${mobile({fontSize: "18px"})}
+`;
+// const Center = styled.div`
+//     flex: 1;
+// `;
+const Right = styled.div`
+flex: 2;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+`;
+const MenuItem = styled.div`
+margin-left: 10px;
+cursor: pointer;
+${mobile({marginLeft: "5px", fontSize: "16px"})}
+`;
+
 const Navbar = () => {
-    const Container = styled.div`
-        height: 60px;
-        color: #333;
-        ${mobile({height: "50px"})}
-    `;
-    const Wrapper = styled.div`
-        padding: 15px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        ${mobile({padding: "10px 20px"})}
-    `;
-    const Left = styled.div`
-        flex: 1;
-    `;
-    const Logo = styled.h1`
-        margin: 0;
-        font-size: 25px;
-        cursor: pointer;
-        ${mobile({fontSize: "18px"})}
-    `;
-    // const Center = styled.div`
-    //     flex: 1;
-    // `;
-    const Right = styled.div`
-        flex: 2;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-    `;
-    const MenuItem = styled.div`
-        margin-left: 10px;
-        cursor: pointer;
-        ${mobile({marginLeft: "5px", fontSize: "16px"})}
-    `;
 
     return (
         <Container>

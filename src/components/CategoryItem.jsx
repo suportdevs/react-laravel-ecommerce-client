@@ -21,13 +21,22 @@ const Button = styled.button`
     }
 `;
 
+const Title = styled.h1`
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    transition: all .3s ease;
+`;
 const Container = styled.div`
     flex: 1;
     margin: 3px;
     position: relative;
     &:hover ${Button}{
-        top: 55%;
+        top: 50%;
         opacity:1;
+    }
+    &:hover ${Title}{
+        margin-bottom: 70px;
     }
 `;
 const Image = styled.img`
@@ -48,19 +57,14 @@ const Info = styled.div`
     justify-content: center;
     color: white;
 `;
-const Title = styled.h1`
-    font-size: 25px;
-    font-weight: 800;
-    margin-bottom: 20px;
-`;
 
 const CategoryItem = ({item}) => {
     return (
         <Container>
-            <Link to={`products/${item.name}`}>
-                <Image src={item.img} />
+            <Link to={`products/${item.slug}`}>
+                <Image src={item.image} />
                 <Info>
-                    <Title>{item.title}</Title>
+                    <Title>{item.name}</Title>
                     <Button>Shop Now</Button>
                 </Info>
             </Link>
