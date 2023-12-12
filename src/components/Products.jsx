@@ -29,7 +29,7 @@ const Products = ({category, filters, sort}) => {
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
-        category && getProducts({category});
+        getProducts({category});
     }, [category]);
 
     useEffect(() => {
@@ -37,28 +37,31 @@ const Products = ({category, filters, sort}) => {
     }, [data, isSuccess]);
 
     useEffect(() => {
-        category && setFilteredProducts(products.filter((item) => 
-        Object.entries(filters).every((key, value) => item[key].includes(value))
-        ))
+        console.log(filters);
+        if(category && filters){
+            setFilteredProducts(products.filter((item) => 
+                Object.entries(filters).every(([key, value]) => item[key].includes(value))
+            ))
+        }else{
+            setFilteredProducts(data);
+        }
     }, [category, products, filters]);
     
     useEffect(() => {
         if(sort === 'newest'){
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => a.created_at - b.created_at)
+            );
+        }else if(sort === 'asc'){
             setFilteredProducts((prev) => 
-                [prev].sort((a,b) => a.created_at - b.created_at)
+                [...prev].sort((a,b) => a.rate - b.rate)
+            )
+        }else{
+            setFilteredProducts((prev) => 
+                [...prev].sort((a,b) => b.rate - a.rate)
             )
         }
-        if(sort === 'asc'){
-            setFilteredProducts((prev) => 
-                [prev].sort((a,b) => a.rate - b.rate)
-            )
-        }
-        if(sort === 'desc'){
-            setFilteredProducts((prev) => 
-                [prev].sort((a,b) => b.rate - a.rate)
-            )
-        }
-    }, [sort])
+    }, [sort]);
 
     return (
         <Container>

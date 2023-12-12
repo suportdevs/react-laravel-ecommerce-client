@@ -1,10 +1,13 @@
 import { Add, Remove } from "@mui/icons-material";
-import Announcement from "../../components/Announcement";
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
-import Newsletter from "../../components/Newsletter";
+import Announcement from "../components/Announcement";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import Newsletter from "../components/Newsletter";
 import styled from "styled-components";
-import {mobile} from "../../reponsive"
+import { mobile } from "../responsive";
+import { useGetProductsMutation } from "../services/webApi";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -95,6 +98,12 @@ const AddtoCartButton = styled.button`
 `;
 
 const Product = () => {
+    const product_id=useParams();
+    const [getProducts, {data, isLoading, isSuccess}] = useGetProductsMutation();
+    const {product, setProduct} = useState({});
+    useEffect(() => {
+        setProduct(getProducts({product_id}));
+    })
     return(
         <>
         <Navbar />

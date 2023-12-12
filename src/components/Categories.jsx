@@ -22,7 +22,6 @@ const Description = styled.p`
 
 const Categories = () => {
     const {data: categories, isLoading, isSuccess} = useGetCategoriesQuery();
-    console.log(categories);
     return (
         <Container>
             <Title>All Categories</Title>

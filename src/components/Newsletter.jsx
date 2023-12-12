@@ -49,7 +49,7 @@ const Newsletter = () => {
             <Title>Newslatter</Title>
             <Description>Lorem ipsum dolor sit amet.</Description>
             <InputContainer>
-            <Input placeHolder="Your email" />
+            <Input placeholder="Your email" />
             <Button><SendOutlined /></Button>
             </InputContainer>
         </Container>
