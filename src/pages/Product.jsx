@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useGetProductsMutation } from "../services/webApi";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -98,53 +98,61 @@ const AddtoCartButton = styled.button`
 `;
 
 const Product = () => {
-    const product_id=useParams();
+    const location = useLocation();
+    const product_id= location.pathname.split("/")[2];
     const [getProducts, {data, isLoading, isSuccess}] = useGetProductsMutation();
-    const {product, setProduct} = useState({});
+    const [product, setProduct] = useState({});
     useEffect(() => {
-        setProduct(getProducts({product_id}));
-    })
+        getProducts({product_id});
+    }, [product_id]);
+    
     return(
         <>
         <Navbar />
         <Announcement />
         <Container>
             <Wrapper>
-                <ImageContainer>
-                    <Image src="https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png"/>
-                </ImageContainer>
-                <InfoContainer>
-                    <Title>Lorem, ipsum dolor.</Title>
-                    <Description>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, illo hic, voluptates molestiae alias veniam id quos praesentium, nostrum harum non qui saepe! Eveniet numquam deleniti accusantium adipisci ducimus maxime ipsa illo sed voluptate culpa hic neque eos fugiat quam, repellat amet modi id. Culpa nihil asperiores itaque suscipit ipsam.</Description>
-                    <Price>$50</Price>
-                    <FilterContainer>
-                        <Filter>
-                            <FilterTitle>Color</FilterTitle>
-                            <FilterColor color="green"></FilterColor>
-                            <FilterColor color="black"></FilterColor>
-                            <FilterColor color="yellow"></FilterColor>
-                            <FilterColor color="red"></FilterColor>
-                        </Filter>
-                        <Filter>
-                            <FilterTitle>Size</FilterTitle>
-                            <Select>
-                                <Option>XS</Option>
-                                <Option>S</Option>
-                                <Option>M</Option>
-                                <Option>L</Option>
-                                <Option>XL</Option>
-                            </Select>
-                        </Filter>
-                    </FilterContainer>
-                    <AddContainer>
-                        <AmountContainer>
-                            <Remove />
-                            <Amount>1</Amount>
-                            <Add />
-                        </AmountContainer>
-                        <AddtoCartButton>Add to Cart</AddtoCartButton>
-                    </AddContainer>
-                </InfoContainer>
+                    {
+                        (!isSuccess && isLoading && data) ? 'Loading...' : (
+                            <>
+                        <ImageContainer>
+                            <Image src={data?.image}/>
+                        </ImageContainer>
+                        <InfoContainer>
+                            <Title>{data?.name}</Title>
+                            <Description>{data?.description}</Description>
+                            <Price>${data?.rate}</Price>
+                            <FilterContainer>
+                                <Filter>
+                                    <FilterTitle>Color</FilterTitle>
+                                    <FilterColor color="green"></FilterColor>
+                                    <FilterColor color="black"></FilterColor>
+                                    <FilterColor color="yellow"></FilterColor>
+                                    <FilterColor color="red"></FilterColor>
+                                </Filter>
+                                <Filter>
+                                    <FilterTitle>Size</FilterTitle>
+                                    <Select>
+                                        <Option>XS</Option>
+                                        <Option>S</Option>
+                                        <Option>M</Option>
+                                        <Option>L</Option>
+                                        <Option>XL</Option>
+                                    </Select>
+                                </Filter>
+                            </FilterContainer>
+                            <AddContainer>
+                                <AmountContainer>
+                                    <Remove />
+                                    <Amount>1</Amount>
+                                    <Add />
+                                </AmountContainer>
+                                <AddtoCartButton>Add to Cart</AddtoCartButton>
+                            </AddContainer>
+                        </InfoContainer>
+                        </>
+                        )
+                    }
             </Wrapper>
         </Container>
         <Newsletter />

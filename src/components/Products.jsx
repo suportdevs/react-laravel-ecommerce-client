@@ -48,18 +48,18 @@ const Products = ({category, filters, sort}) => {
     }, [category, products, filters]);
     
     useEffect(() => {
-        if(sort === 'newest'){
+        if (sort === "newest") {
             setFilteredProducts((prev) =>
-                [...prev].sort((a, b) => a.created_at - b.created_at)
+            [...prev].sort((a, b) => a.createdAt - b.createdAt)
             );
-        }else if(sort === 'asc'){
-            setFilteredProducts((prev) => 
-                [...prev].sort((a,b) => a.rate - b.rate)
-            )
-        }else{
-            setFilteredProducts((prev) => 
-                [...prev].sort((a,b) => b.rate - a.rate)
-            )
+        } else if (sort === "asc") {
+            setFilteredProducts((prev) =>
+            [...prev].sort((a, b) => a.rate - b.rate)
+            );
+        } else {
+            sort && setFilteredProducts((prev) =>
+            [...prev].sort((a, b) => b.rate - a.rate)
+            );
         }
     }, [sort]);
 

@@ -5,10 +5,12 @@ export const webApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8000/api'}),
     endpoints: (builder) => ({
         getProducts: builder.mutation({
-            query: (object) => ({
+            query: (data) => (
+                console.log(data),
+                {
                 url: `/products`,
                 method: 'POST',
-                body: object,
+                body: data,
             }),
         }),
         getCategories: builder.query({
