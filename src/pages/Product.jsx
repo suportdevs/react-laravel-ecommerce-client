@@ -105,54 +105,55 @@ const Product = () => {
     useEffect(() => {
         getProducts({product_id});
     }, [product_id]);
-    
+
     return(
         <>
         <Navbar />
         <Announcement />
         <Container>
             <Wrapper>
-                    {
-                        (!isSuccess && isLoading && data) ? 'Loading...' : (
-                            <>
-                        <ImageContainer>
-                            <Image src={data?.image}/>
-                        </ImageContainer>
-                        <InfoContainer>
-                            <Title>{data?.name}</Title>
-                            <Description>{data?.description}</Description>
-                            <Price>${data?.rate}</Price>
-                            <FilterContainer>
-                                <Filter>
-                                    <FilterTitle>Color</FilterTitle>
-                                    <FilterColor color="green"></FilterColor>
-                                    <FilterColor color="black"></FilterColor>
-                                    <FilterColor color="yellow"></FilterColor>
-                                    <FilterColor color="red"></FilterColor>
-                                </Filter>
-                                <Filter>
-                                    <FilterTitle>Size</FilterTitle>
-                                    <Select>
-                                        <Option>XS</Option>
-                                        <Option>S</Option>
-                                        <Option>M</Option>
-                                        <Option>L</Option>
-                                        <Option>XL</Option>
-                                    </Select>
-                                </Filter>
-                            </FilterContainer>
-                            <AddContainer>
-                                <AmountContainer>
-                                    <Remove />
-                                    <Amount>1</Amount>
-                                    <Add />
-                                </AmountContainer>
-                                <AddtoCartButton>Add to Cart</AddtoCartButton>
-                            </AddContainer>
-                        </InfoContainer>
-                        </>
-                        )
-                    }
+                {
+                    (!isSuccess && isLoading && data) ? 'Loading...' : (
+                        <>
+                    <ImageContainer>
+                        <Image src={data?.product?.image}/>
+                    </ImageContainer>
+                    <InfoContainer>
+                        <Title>{data?.product?.name}</Title>
+                        <Description>{data?.product?.description}</Description>
+                        <Price>${data?.product?.rate}</Price>
+                        <FilterContainer>
+                            <Filter>
+                                <FilterTitle>Color</FilterTitle>
+                                {
+                                    data?.colors?.map(color => (
+                                        <FilterColor color={color.color}></FilterColor>
+                                    ))
+                                }
+                            </Filter>
+                            <Filter>
+                                <FilterTitle>Size</FilterTitle>
+                                <Select>
+                                    {
+                                        data?.sizes?.map(size => (
+                                            <Option value={size.name}>{size.name}</Option>
+                                        ))
+                                    }
+                                </Select>
+                            </Filter>
+                        </FilterContainer>
+                        <AddContainer>
+                            <AmountContainer>
+                                <Remove />
+                                <Amount>1</Amount>
+                                <Add />
+                            </AmountContainer>
+                            <AddtoCartButton>Add to Cart</AddtoCartButton>
+                        </AddContainer>
+                    </InfoContainer>
+                    </>
+                    )
+                }
             </Wrapper>
         </Container>
         <Newsletter />
