@@ -6,6 +6,7 @@ import { mobile, tablet } from "../responsive";
 import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import StripeCheckout from "react-stripe-checkout";
 
 const Container = styled.div`
     padding: 20px;
