@@ -8,6 +8,9 @@ import { mobile } from "../responsive";
 import { useGetProductsMutation } from "../services/webApi";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../services/cartSlice";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -98,13 +101,46 @@ const AddtoCartButton = styled.button`
 `;
 
 const Product = () => {
+    const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(1);
+    const [color, setColor] = useState("");
+    const [colorName, setColorName] = useState("");
+    const [size, setSize] = useState("");
+    const [sizeName, setSizeName] = useState("");
     const location = useLocation();
     const product_id= location.pathname.split("/")[2];
     const [getProducts, {data, isLoading, isSuccess}] = useGetProductsMutation();
-    const [product, setProduct] = useState({});
+
     useEffect(() => {
         getProducts({product_id});
     }, [product_id]);
+
+    const handleQuantity = (direction) => {
+        if(direction === 'decrease'){
+            quantity > 1 && setQuantity(quantity - 1);
+        }else{
+            setQuantity(quantity + 1);
+        }
+    }
+    const handleAddToCart = () => {
+        if(color === ""){
+            toast.error("Please select any color.");
+            return false;
+        }
+        if(size === ""){
+            toast.error("Please select any size.");
+            return false;
+        }
+        const productObj = {
+            id: data?.product?.id,
+            name:data?.product?.name,
+            image:data?.product?.image,
+            description: data?.product?.description,
+            rate: data?.product?.rate,
+        }
+        dispatch(addToCart({...productObj, color, colorName, size, sizeName, quantity}));
+        toast.success(`Successfully ${data.name} product added in your cart`);
+    }
 
     return(
         <>
@@ -127,16 +163,20 @@ const Product = () => {
                                 <FilterTitle>Color</FilterTitle>
                                 {
                                     data?.colors?.map(color => (
-                                        <FilterColor color={color.color}></FilterColor>
+                                        <FilterColor color={color.color} onClick={(e) => setColor(color.id)} onClickCapture={() => setColorName(color.color)} key={color.color}></FilterColor>
                                     ))
                                 }
                             </Filter>
                             <Filter>
                                 <FilterTitle>Size</FilterTitle>
-                                <Select>
+                                <Select onChange={(e) => {
+                                    setSize(e.target.value);
+                                    setSizeName(e.target.options[e.target.selectedIndex].text);
+                                }}>
+                                    <Option value="">Select Size</Option>
                                     {
                                         data?.sizes?.map(size => (
-                                            <Option value={size.name}>{size.name}</Option>
+                                            <Option value={size.id} ey={size.id}>{size.name}</Option>
                                         ))
                                     }
                                 </Select>
@@ -144,11 +184,11 @@ const Product = () => {
                         </FilterContainer>
                         <AddContainer>
                             <AmountContainer>
-                                <Remove />
-                                <Amount>1</Amount>
-                                <Add />
+                                <Remove onClick={() => handleQuantity('decrease')} style={{cursor: 'pointer'}} />
+                                <Amount>{quantity}</Amount>
+                                <Add onClick={() => handleQuantity('increase')} style={{cursor: 'pointer'}} />
                             </AmountContainer>
-                            <AddtoCartButton>Add to Cart</AddtoCartButton>
+                            <AddtoCartButton onClick={handleAddToCart}>Add to Cart</AddtoCartButton>
                         </AddContainer>
                     </InfoContainer>
                     </>
